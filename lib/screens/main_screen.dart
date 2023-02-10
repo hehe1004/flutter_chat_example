@@ -436,12 +436,12 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
 
                             if (newUser.user != null) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) {
-                                  return ChatScreen();
-                                }),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) {
+                              //     return ChatScreen();
+                              //   }),
+                              // );
                               setState(() {
                                 showSpinner = false;
                               });
@@ -467,14 +467,14 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                               password: userPassword,
                             );
                             if (newUser.user != null) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return ChatScreen();
-                                  },
-                                ),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) {
+                              //       return ChatScreen();
+                              //     },
+                              //   ),
+                              // );
                               setState(() {
                                 showSpinner = false;
                               });
