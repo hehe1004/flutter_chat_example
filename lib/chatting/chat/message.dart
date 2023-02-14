@@ -12,8 +12,8 @@ class Messages extends StatelessWidget {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('chat')
-      //스트림에 접근하기 전에
-          .orderBy('time')
+          //스트림에 접근하기 전에
+          .orderBy('time', descending: true)
           .snapshots(),
       builder: (context,
           AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -30,8 +30,11 @@ class Messages extends StatelessWidget {
             //메세지 순서
             itemCount: chatDocs.length,
             itemBuilder: (context, index) {
-              return ChatBubble(chatDocs[index]['text'],
-                chatDocs[index]['userId'].toString() ==user!.uid
+              return ChatBubbles(
+                  chatDocs[index]['text'],
+                  chatDocs[index]['userId'].toString() == user!.uid,
+                  chatDocs[index]['userName'].toString(),
+                  chatDocs[index]['userImage']
               );
 
             });

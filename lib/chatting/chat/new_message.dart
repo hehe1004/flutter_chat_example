@@ -15,9 +15,14 @@ class _NewMessageState extends State<NewMessage> {
 
   var _userEnterMessage = '';
 
-  void _sendMessage() {
+  void _sendMessage() async {
     FocusScope.of(context).unfocus();
+
+
     final user = FirebaseAuth.instance.currentUser;
+
+    final userData = await FirebaseFirestore.instance.collection('user').doc(user!.uid).get();
+    //get 메소드 반환값 퓨터라 await, async 추가
     //보내기 버튼으로 데이터 추가
     FirebaseFirestore.instance
         .collection('chat')
@@ -25,6 +30,8 @@ class _NewMessageState extends State<NewMessage> {
       'text': _userEnterMessage,
       'time': Timestamp.now(),
       'userId': user!.uid,
+      'userName': userData.data()!['userName'],
+      'userImage' : userData.data()!['picked_image']
     });
     _controller.clear();
   }
@@ -38,6 +45,8 @@ class _NewMessageState extends State<NewMessage> {
         children: [
           Expanded(
             child: TextField(
+              maxLines: null,
+              //텍스트 필드 자동 줄바꿈
               controller: _controller,
               decoration: InputDecoration(
                 labelText: 'send a message...',
